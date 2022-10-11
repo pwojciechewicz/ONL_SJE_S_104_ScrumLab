@@ -122,14 +122,15 @@ public class RecipeDao {
     public void update(Recipe recipe) {
         try (Connection connection = DbUtil.getConnection();
              PreparedStatement statement = connection.prepareStatement(UPDATE_RECIPE_QUERY)) {
-            statement.setInt(8, recipe.getId());
+            statement.setInt(9, recipe.getId());
             statement.setString(1, recipe.getName());
-            statement.setString(2, recipe.getDescription());
-            statement.setString(3, recipe.getCreated());
-            statement.setString(4, recipe.getUpdated());
-            statement.setInt(5, recipe.getPreparationTime());
-            statement.setString(6, recipe.getPreparation());
-            statement.setInt(7, recipe.getAdminId());
+            statement.setString(2, recipe.getIngredients());
+            statement.setString(3, recipe.getDescription());
+            statement.setString(4, recipe.getCreated());
+            statement.setString(5, recipe.getUpdated());
+            statement.setInt(6, recipe.getPreparationTime());
+            statement.setString(7, recipe.getPreparation());
+            statement.setInt(8, recipe.getAdminId());
 
             statement.executeUpdate();
         } catch (Exception e) {

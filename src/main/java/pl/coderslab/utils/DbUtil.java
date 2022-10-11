@@ -10,14 +10,9 @@ import java.sql.SQLException;
 
 public class DbUtil {
     private static DataSource dataSource;
-    private static final String DB_URL = "jdbc:mysql://localhost:3306/scrumlab?useSSL=false&characterEncoding=utf8";
-    private static final String DB_USER = "root";
-    private static final String DB_PASS = "coderslab";
-
 
     public static Connection getConnection() throws SQLException {
-        return DriverManager.getConnection(DB_URL, DB_USER, DB_PASS);
-//        return getInstance().getConnection();
+        return getInstance().getConnection();
     }
 
     private static DataSource getInstance() {
