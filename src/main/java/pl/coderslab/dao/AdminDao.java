@@ -13,11 +13,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AdminDao {
-    private static final String CREATE_ADMIN_QUERY = "INSERT INTO admins(id,firstName,lastName,email,password,superAdmin,enable) VALUES (?,?,?,?,?,?,?)";
+    private static final String CREATE_ADMIN_QUERY = "INSERT INTO admins(firstName,lastName,email,password,superAdmin,enable) VALUES (?,?,?,?,?,?)";
     private static final String DELETE_ADMIN_QUERY = "DELETE FROM admins where id = ?;";
     private static final String FIND_ALL_ADMINS_QUERY = "SELECT * FROM admins;";
     private static final String READ_ADMIN_QUERY = "SELECT * from admins where id = ?;";
-    private static final String UPDATE_ADMIN_QUERY = "UPDATE admins SET firstName = ? , lastName = ?, email = ?, password = ?, superAdmin = ? WHERE	id = ?;";
+    private static final String UPDATE_ADMIN_QUERY = "UPDATE admins SET firstName = ? , lastName = ?, email = ?, password = ?, superAdmin = ?, enable = ? WHERE	id = ?;";
 
     /**
      * Get admin by id
@@ -37,7 +37,9 @@ public class AdminDao {
                     admin.setFirstName(resultSet.getString("first_name"));
                     admin.setLastName(resultSet.getString("last_name"));
                     admin.setEmail(resultSet.getString("email"));
+                    admin.setEmail(resultSet.getString("password"));
                     admin.setSuperAdmin(resultSet.getInt("superadmin"));
+                    admin.setSuperAdmin(resultSet.getInt("enable"));
 
                 }
             }
@@ -86,13 +88,12 @@ public class AdminDao {
         try (Connection connection = DbUtil.getConnection();
              PreparedStatement insertStm = connection.prepareStatement(CREATE_ADMIN_QUERY,
                      PreparedStatement.RETURN_GENERATED_KEYS)) {
-            insertStm.setInt(1, admin.getId());
-            insertStm.setString(2, admin.getFirstName());
-            insertStm.setString(3, admin.getLastName());
-            insertStm.setString(4, admin.getEmail());
-            insertStm.setString(5, hashPass(admin.getPassword()));
-            insertStm.setInt(6, admin.getSuperAdmin());
-            insertStm.setInt(7, admin.getEnable());
+            insertStm.setString(1, admin.getFirstName());
+            insertStm.setString(2, admin.getLastName());
+            insertStm.setString(3, admin.getEmail());
+            insertStm.setString(4, hashPass(admin.getPassword()));
+            insertStm.setInt(5, admin.getSuperAdmin());
+            insertStm.setInt(6, admin.getEnable());
             int result = insertStm.executeUpdate();
 
             if (result != 1) {
@@ -144,12 +145,13 @@ public class AdminDao {
     public void update(Admin admin) {
         try (Connection connection = DbUtil.getConnection();
              PreparedStatement statement = connection.prepareStatement(UPDATE_ADMIN_QUERY)) {
-            statement.setInt(6, admin.getId());
             statement.setString(1, admin.getFirstName());
             statement.setString(2, admin.getLastName());
             statement.setString(3, admin.getEmail());
-            statement.setInt(4, admin.getSuperAdmin());
-            statement.setInt(5, admin.getEnable());
+            statement.setString(4, this.hashPass(admin.getPassword()));
+            statement.setInt(5, admin.getSuperAdmin());
+            statement.setInt(6, admin.getEnable());
+            statement.setInt(7, admin.getId());
 
             statement.executeUpdate();
         } catch (Exception e) {
