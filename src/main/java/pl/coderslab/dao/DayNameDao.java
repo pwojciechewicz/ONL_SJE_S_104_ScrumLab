@@ -12,7 +12,7 @@ import java.util.List;
 
 
 public class DayNameDao {
-    private static final String FIND_ALL_DAY_NAMES_QUERY = "SELECT * FROM dayName;";
+    private static final String FIND_ALL_DAY_NAMES_QUERY = "SELECT * FROM day_name";
     public List<DayName> findAll() {
         List<DayName> dayNames = new ArrayList<>();
        try (Connection connection = DbUtil.getConnection();
@@ -23,7 +23,7 @@ public class DayNameDao {
                 DayName dayNameToAdd = new DayName();
                 dayNameToAdd.setId(resultSet.getInt("id"));
                 dayNameToAdd.setName(resultSet.getString("name"));
-                dayNameToAdd.setDisplayOrder(resultSet.getInt("displayOrder"));
+                dayNameToAdd.setDisplayOrder(resultSet.getInt("display_order"));
                 dayNames.add(dayNameToAdd);
             }
 
