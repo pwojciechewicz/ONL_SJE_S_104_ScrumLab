@@ -13,11 +13,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AdminDao {
-    private static final String CREATE_ADMIN_QUERY = "INSERT INTO admins(firstName,lastName,email,password,superAdmin,enable) VALUES (?,?,?,?,?,?)";
+    private static final String CREATE_ADMIN_QUERY = "INSERT INTO admins(first_name,last_name,email,password,superadmin,enable) VALUES (?,?,?,?,?,?)";
     private static final String DELETE_ADMIN_QUERY = "DELETE FROM admins where id = ?;";
     private static final String FIND_ALL_ADMINS_QUERY = "SELECT * FROM admins;";
     private static final String READ_ADMIN_QUERY = "SELECT * from admins where id = ?;";
-    private static final String UPDATE_ADMIN_QUERY = "UPDATE admins SET firstName = ? , lastName = ?, email = ?, password = ?, superAdmin = ?, enable = ? WHERE	id = ?;";
+    private static final String UPDATE_ADMIN_QUERY = "UPDATE admins SET first_name = ? , last_name = ?, email = ?, password = ?, superadmin = ?, enable = ? WHERE	id = ?;";
 
     /**
      * Get admin by id
@@ -121,7 +121,7 @@ public class AdminDao {
      *
      * @param adminId
      */
-    public void delete(int adminId) {
+    public static void delete(int adminId) {
         try (Connection connection = DbUtil.getConnection();
              PreparedStatement statement = connection.prepareStatement(DELETE_ADMIN_QUERY)) {
             statement.setInt(1, adminId);
