@@ -19,7 +19,6 @@ public class AdminDao {
     private static final String FIND_ALL_ADMINS_QUERY = "SELECT * FROM admins";
     private static final String READ_ADMIN_QUERY = "SELECT * from admins where id = ?";
     private static final String UPDATE_ADMIN_QUERY = "UPDATE admins SET first_name = ? , last_name = ?, email = ?, password = ?, superadmin = ?, enable = ? WHERE	id = ?";
-
     private static final String READ_ADMIN_QUERY_EMAIL = "SELECT * from admins where email = ? LIMIT 1";
     private static final String READ_ADMIN_QUERY_FIRSTNAME = "SELECT * from admins where first_name = ? LIMIT 1";
 

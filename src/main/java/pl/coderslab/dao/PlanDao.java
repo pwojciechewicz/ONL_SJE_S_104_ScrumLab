@@ -1,6 +1,7 @@
 package pl.coderslab.dao;
 
 import pl.coderslab.exception.NotFoundException;
+import pl.coderslab.model.Admin;
 import pl.coderslab.model.Book;
 import pl.coderslab.model.Plan;
 import pl.coderslab.utils.DbUtil;
@@ -16,6 +17,7 @@ public class PlanDao {
     // ZAPYTANIA SQL
     private static final String READ_PLAN_QUERY = "SELECT * from plan where id = ?;";
     private static final String FIND_ALL_PLANS_QUERY = "SELECT * FROM plan;";
+    private static final String FIND_PLANS_BY_ADMIN_ID_QUERY = "SELECT COUNT(*) AS value FROM plan WHERE admin_id = ?";
     private static final String CREATE_PLAN_QUERY = "INSERT INTO plan(name, description, created, admin_id) VALUES (?,?,?,?);";
     private static final String DELETE_PLAN_QUERY = "DELETE FROM plan where id = ?;";
     private static final String UPDATE_PLAN_QUERY = "UPDATE	plan SET name = ? , description = ?, created = ?, admin_id = ? WHERE	id = ?;";
@@ -131,7 +133,6 @@ public class PlanDao {
         }
     }
 
-
     /**
      * Update plan
      *
@@ -150,6 +151,20 @@ public class PlanDao {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
 
+    public int countAdminPlans(Admin admin) {
+        int count = 0;
+        try (Connection connection = DbUtil.getConnection();
+             PreparedStatement statement = connection.prepareStatement(FIND_PLANS_BY_ADMIN_ID_QUERY);
+        ) {
+            statement.setInt(1, admin.getId());
+            ResultSet resultSet = statement.executeQuery();
+            resultSet.next();
+            count = resultSet.getInt("value");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return count;
     }
 }
