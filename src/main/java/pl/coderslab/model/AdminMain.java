@@ -5,7 +5,7 @@ import pl.coderslab.dao.AdminDao;
 public class AdminMain {
     public static void main(String[] args) {
         AdminDao adminDao = new AdminDao();
-//        System.out.println(AdminDao.read(1));
+        System.out.println(AdminDao.read(1));
 //        AdminDao.findAll();
         Admin admin = new Admin();
         admin.setFirstName("Franek");
@@ -15,7 +15,7 @@ public class AdminMain {
         admin.setSuperAdmin(1);
         admin.setEnable(1);
 
-        adminDao.create(admin);
+//        adminDao.create(admin);
     }
 }
 
