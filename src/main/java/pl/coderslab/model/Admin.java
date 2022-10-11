@@ -1,6 +1,9 @@
 package pl.coderslab.model;
 
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 public class Admin {
     private int id;
     private String firstName;
@@ -90,6 +93,18 @@ public class Admin {
 
     public void setEnable(int enable) {
         this.enable = enable;
+    }
+
+    public Admin map(ResultSet resultSet) throws SQLException {
+        this.setId(resultSet.getInt("id"));
+        this.setFirstName(resultSet.getString("first_name"));
+        this.setLastName(resultSet.getString("last_name"));
+        this.setEmail(resultSet.getString("email"));
+        this.setPassword(resultSet.getString("password"));
+        this.setSuperAdmin(resultSet.getInt("superadmin"));
+        this.setEnable(resultSet.getInt("enable"));
+
+        return this;
     }
 
 }
