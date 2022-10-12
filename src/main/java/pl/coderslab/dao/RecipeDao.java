@@ -1,8 +1,11 @@
 package pl.coderslab.dao;
 
 import pl.coderslab.exception.NotFoundException;
+import pl.coderslab.model.Admin;
 import pl.coderslab.model.Recipe;
+
 import pl.coderslab.utils.DbUtil;
+
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -16,6 +19,7 @@ public class RecipeDao {
     private static final String CREATE_RECIPE_QUERY = "INSERT INTO scrumlab.recipe(name, ingredients, description, created, updated, preparation_time, preparation, admin_id) VALUES (?,?,?,?,?,?,?,?);";
     private static final String DELETE_RECIPE_QUERY = "DELETE FROM scrumlab.recipe where id = ?;";
     private static final String FIND_ALL_RECIPE_QUERY = "SELECT * FROM scrumlab.recipe;";
+    private static final String FIND_RECIPE_BY_ADMIN_ID_QUERY = "SELECT COUNT(*) AS quantity FROM recipe WHERE admin_id = ?";
     private static final String READ_RECIPE_QUERY = "SELECT * from scrumlab.recipe where id = ?;";
     private static final String UPDATE_RECIPE_QUERY = "UPDATE  scrumlab.recipe SET name = ?, ingredients= ?, description= ?, created=?, updated=?, preparation_time=?, preparation=?, admin_id=? WHERE id=?;";
 
@@ -145,5 +149,19 @@ public class RecipeDao {
         }
     }
 
+    public int countAdminRecipe(Admin admin) {
+        int count = 0;
+        try (Connection connection = DbUtil.getConnection();
+             PreparedStatement statement = connection.prepareStatement(FIND_RECIPE_BY_ADMIN_ID_QUERY);
+        ) {
+            statement.setInt(1, admin.getId());
+            ResultSet resultSet = statement.executeQuery();
+            resultSet.next();
+            count = resultSet.getInt("quantity");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return count;
+    }
 }
 
