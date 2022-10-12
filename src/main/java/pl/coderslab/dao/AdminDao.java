@@ -23,6 +23,8 @@ public class AdminDao {
 
     private static final String READ_ADMIN_QUERY_FIRSTNAME = "SELECT * from admins where first_name = ? LIMIT 1";
 
+    private static final String SALT = "$2a$10$mQdJ0PLe5ZFqkX4uIoEp8u";
+
     /**
      * Get admin by id
      *
@@ -165,7 +167,8 @@ public class AdminDao {
     }
 
     public static String hashPass(String password) {
-        return BCrypt.hashpw(password, BCrypt.gensalt());
+
+        return BCrypt.hashpw(password, SALT);
     }
 
     public Admin findByFirstName(String firstName) {
