@@ -28,6 +28,6 @@ public class RegistrationServlet extends HttpServlet {
         AdminDao adminDao = new AdminDao();
         adminDao.create(admin);
 
-        request.getRequestDispatcher(request.getContextPath() + "/login").forward(request, response);
+        response.sendRedirect(request.getContextPath() + "/login");
     }
 }

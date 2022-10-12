@@ -1,7 +1,10 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<jsp:include page="${pageContext.request.contextPath}/header.jsp"/>
+<%--<jsp:include page="${pageContext.request.contextPath}/header.jsp"/>--%>
+
+<%@ include file="/header.jsp" %>
+<link href='<c:url value="/css/style.css"/>' rel="stylesheet" type="text/css">
 
 
 
@@ -172,6 +175,7 @@
     </div>
 </section>
 
-<jsp:include page="${pageContext.request.contextPath}/footer.jsp"/>
+<%--<jsp:include page="${pageContext.request.contextPath}/footer.jsp"/>--%>
+<%@ include file="/footer.jsp" %>
 
 
