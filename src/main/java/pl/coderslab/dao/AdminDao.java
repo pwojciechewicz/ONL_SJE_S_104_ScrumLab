@@ -19,8 +19,8 @@ public class AdminDao {
     private static final String FIND_ALL_ADMINS_QUERY = "SELECT * FROM admins";
     private static final String READ_ADMIN_QUERY = "SELECT * from admins where id = ?";
     private static final String UPDATE_ADMIN_QUERY = "UPDATE admins SET first_name = ? , last_name = ?, email = ?, password = ?, superadmin = ?, enable = ? WHERE	id = ?";
+    private static final String READ_ADMIN_QUERY_EMAIL = "SELECT * from admins where email = ? LIMIT 1";
 
-    private static final String READ_ADMIN_QUERY_ID = "SELECT * from admins where id = ? LIMIT 1";
     private static final String READ_ADMIN_QUERY_FIRSTNAME = "SELECT * from admins where first_name = ? LIMIT 1";
 
     /**
@@ -184,10 +184,10 @@ public class AdminDao {
         return null;
     }
 
-    public Admin findById(int id) {
+    public Admin findByEmail(String email) {
         try (Connection conn = DbUtil.getConnection()) {
-            PreparedStatement statement = conn.prepareStatement(READ_ADMIN_QUERY_ID);
-            statement.setInt(1, id);
+            PreparedStatement statement = conn.prepareStatement(READ_ADMIN_QUERY_EMAIL);
+            statement.setString(1, email);
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
                 Admin admin = new Admin();

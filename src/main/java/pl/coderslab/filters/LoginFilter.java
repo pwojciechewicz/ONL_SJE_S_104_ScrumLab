@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-@WebFilter(filterName = "LoginFilter", value = "/user/*")
+@WebFilter(filterName = "LoginFilter", value = "/admin/*")
 public class LoginFilter implements Filter {
     public void init(FilterConfig config) throws ServletException {
     }
@@ -22,7 +22,7 @@ public class LoginFilter implements Filter {
         HttpSession httpSession = request.getSession();
 
         if (httpSession.getAttribute("email") == null) {
-            response.sendRedirect(request.getContextPath() + "/login?msg=error");
+            response.sendRedirect(request.getContextPath() + "/login");
         } else {
             filterChain.doFilter(servletRequest, servletResponse);
         }
