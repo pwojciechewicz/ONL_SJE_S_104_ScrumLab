@@ -1,6 +1,17 @@
 package pl.coderslab.model;
 
 public class Recipe {
+    public Recipe() {
+    }
+
+    public Recipe(String name, String ingredients, String description, int preparationTime, String preparation) {
+        this.name = name;
+        this.ingredients = ingredients;
+        this.description = description;
+        this.preparationTime = preparationTime;
+        this.preparation = preparation;
+    }
+
     private int id;
     private String name;
     private String ingredients;
