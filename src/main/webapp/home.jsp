@@ -1,8 +1,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-
 <jsp:include page="${pageContext.request.contextPath}/header.jsp"/>
+
+
 
 <section class="padding-large bg-light">
     <div id="carouselExampleControls" class="carousel slide main-slider" data-ride="carousel">
@@ -64,7 +65,7 @@
 <section class="padding-small details bg-light">
     <div class="container">
         <div class="row">
-            <div class="col text-center">
+            <div class="col text-center">book
                 <i class="fas fa-check icon-details"></i>
                 <h1>Lorem ipsum dolor sit amet</h1>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at porttitor sem.  Aliquam erat volutpat. Donec placerat nisl magna, et faucibus arcu condimentum sed.
@@ -172,3 +173,5 @@
 </section>
 
 <jsp:include page="${pageContext.request.contextPath}/footer.jsp"/>
+
+
