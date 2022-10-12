@@ -16,8 +16,9 @@ public class RecipeListServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         getServletContext().getRequestDispatcher("/recipelist.jsp").forward(request, response);
         RecipeDao recipeDao = new RecipeDao();
-        List<Recipe> recipes = recipeDao.findAll();
-        System.out.println(recipes);
+        request.setAttribute("recipes", recipeDao.findAll());
+//        List<Recipe> recipes = recipeDao.findAll();
+//        System.out.println(recipes);
     }
 
     @Override

@@ -20,16 +20,16 @@ public class RecipeAddServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String name = request.getParameter("name");
-        String description = request.getParameter("description");
-        String preparationTime = request.getParameter("preparation_time");
-        String preparation = request.getParameter("preparation");
-        String ingredients = request.getParameter("ingredients");
+        Recipe recipe = new Recipe();
+        recipe.setName(request.getParameter("name"));
+        recipe.setDescription(request.getParameter("description"));
+        recipe.setPreparationTime(Integer.parseInt(request.getParameter("preparation_time")));
+        recipe.setPreparation(request.getParameter("preparation"));
+        recipe.setIngredients(request.getParameter("ingredients"));
 
-        Recipe recipe = new Recipe(name, description, preparation, Integer.parseInt(preparationTime), ingredients);
         RecipeDao recipeDao = new RecipeDao();
         recipeDao.create(recipe);
 
-        response.sendRedirect("/recipe/list");
+        response.sendRedirect(request.getContextPath() + "/recipe/list");
     }
 }
