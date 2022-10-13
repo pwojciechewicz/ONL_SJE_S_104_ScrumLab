@@ -28,9 +28,9 @@ public class LoginServlet extends HttpServlet {
         Admin admin = adminDao.findByEmail(email);
 
         if (adminService.verifyLoginEmail(email) && adminService.verifyLoginPassword(password, admin)) {
-            response.sendRedirect(request.getContextPath() + "/home.jsp");
             HttpSession session = request.getSession();
             session.setAttribute("loggedAdmin", admin);
+            response.sendRedirect(request.getContextPath() + "/dashboard");
         } else {
             response.sendRedirect(request.getContextPath() + "/login");
         }
