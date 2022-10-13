@@ -10,7 +10,6 @@
 <link href='<c:url value="/css/style.css"/>' rel="stylesheet" type="text/css">
 <jsp:include page="${pageContext.request.contextPath}/header.jsp"/>
 
-
 <jsp:include page="${pageContext.request.contextPath}/sideBarMenu.jsp"/>
 
             <div class="m-4 p-3 width-medium">
