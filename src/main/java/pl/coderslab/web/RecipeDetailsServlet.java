@@ -9,13 +9,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(name = "RecipeShowServlet", value = "/recipe/list")
+@WebServlet(name = "RecipeDetailsServlet", value = "/app/recipe/details")
 public class RecipeDetailsServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         RecipeDao recipeDao = new RecipeDao();
-        request.setAttribute("recipes", recipeDao.findAll());
-        getServletContext().getRequestDispatcher("/recipelist.jsp").forward(request, response);
+        String id = request.getParameter("id");
+        Integer _id = Integer.parseInt(id);
+        request.setAttribute("recipe",recipeDao.read(_id));
+        getServletContext().getRequestDispatcher("/recipedetails.jsp").forward(request, response);
     }
 
     @Override

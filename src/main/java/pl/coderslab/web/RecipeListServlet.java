@@ -10,7 +10,7 @@ import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet(name = "RecipeShowServlet", value = "/recipe/list")
+@WebServlet(name = "RecipeShowServlet", value = "/app/recipe/list")
 public class RecipeListServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

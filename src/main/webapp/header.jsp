@@ -42,7 +42,7 @@
 
             </li>
             <li class="nav-item ml-4">
-                <a class="nav-link disabled" href="/recipe/list">Przepisy</a>
+                <a class="nav-link disabled" href="/app/recipe/list">Przepisy</a>
             </li>
             <li class="nav-item ml-4">
 
