@@ -14,13 +14,10 @@ import java.util.List;
 /**
  * Do not change servlet address !!!
  */
-@WebServlet("")
+@WebServlet(value="/home")
 public class HomeServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//        BookDao bookDao = new BookDao();
-//        List<Book> books = bookDao.findAll();
-//        System.out.println(books);
 
         getServletContext().getRequestDispatcher("/home.jsp").forward(request, response);
     }
