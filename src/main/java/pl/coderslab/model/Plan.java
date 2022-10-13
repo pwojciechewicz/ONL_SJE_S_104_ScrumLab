@@ -8,6 +8,7 @@ public class Plan {
     private String created;
     private int adminId;
 
+
     @Override
     public String toString() {
         return "Plan [id=" + id + ", name=" + name + ", description=" + description + ", created=" + created + ", admin id=" + adminId + "]";
