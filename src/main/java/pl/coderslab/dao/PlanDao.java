@@ -30,6 +30,16 @@ public class PlanDao {
                             WHERE recipe_plan.plan_id =  (SELECT MAX(id) from plan WHERE admin_id = ?)
                     ORDER by day_name.display_order, recipe_plan.display_order;
             """;
+    private static final String READ_PLAN_DETAILS_QUERRY = """
+                    SELECT plan.name as plan_name, plan.description as plan_description, day_name.name as day_name, meal_name,  recipe.name as recipe_name
+                    FROM `recipe_plan`
+                             JOIN day_name on day_name.id=day_name_id
+                             JOIN recipe on recipe.id=recipe_id
+                             JOIN plan on recipe_plan.plan_id = plan.id
+                    WHERE plan.id = ?
+                    ORDER by day_name.display_order, recipe_plan.display_order;
+            """;
+
 
     /**
      * Get plan by id
@@ -189,6 +199,28 @@ public class PlanDao {
             while (resultSet.next()) {
                 MealPlan mealPlan = new MealPlan();
                 mealPlan.setPlanName(resultSet.getString("plan_name"));
+                mealPlan.setDayName(resultSet.getString("day_name"));
+                mealPlan.setMealName(resultSet.getString("meal_name"));
+                mealPlan.setRecipeName(resultSet.getString("recipe_name"));
+                mealPlanList.add(mealPlan);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return mealPlanList;
+    }
+    public List<MealPlan> planDetails(int planId) {
+        List<MealPlan> mealPlanList = new ArrayList<>();
+        try (Connection connection = DbUtil.getConnection();
+             PreparedStatement statement = connection.prepareStatement(READ_PLAN_DETAILS_QUERRY);
+        ) {
+            statement.setInt(1, planId);
+            ResultSet resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+                MealPlan mealPlan = new MealPlan();
+                mealPlan.setPlanName(resultSet.getString("plan_name"));
+                mealPlan.setPlanDesription(resultSet.getString("plan_description"));
                 mealPlan.setDayName(resultSet.getString("day_name"));
                 mealPlan.setMealName(resultSet.getString("meal_name"));
                 mealPlan.setRecipeName(resultSet.getString("recipe_name"));
