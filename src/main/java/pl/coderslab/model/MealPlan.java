@@ -5,12 +5,14 @@ public class MealPlan {
     private String mealName;
     private String recipeName;
     private String planName;
+    private String planDesription;
 
-    public MealPlan(String dayName, String mealName, String recipeName, String recipeDescription) {
+    public MealPlan(String dayName, String mealName, String recipeName, String planName, String planDesription) {
         this.dayName = dayName;
         this.mealName = mealName;
         this.recipeName = recipeName;
-        this.planName = recipeDescription;
+        this.planName = planName;
+        this.planName = planDesription;
     }
     public MealPlan() {
     }
@@ -45,5 +47,13 @@ public class MealPlan {
 
     public void setPlanName(String planName) {
         this.planName = planName;
+    }
+
+    public String getPlanDesription() {
+        return planDesription;
+    }
+
+    public void setPlanDesription(String planDesription) {
+        this.planDesription = planDesription;
     }
 }
