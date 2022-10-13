@@ -9,6 +9,7 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
+import java.util.List;
 
 @WebServlet(name = "LoginServlet", value = "/login")
 public class LoginServlet extends HttpServlet {
@@ -24,11 +25,12 @@ public class LoginServlet extends HttpServlet {
         String password = request.getParameter("password");
         AdminService adminService = new AdminService();
         AdminDao adminDao = new AdminDao();
+        Admin admin = adminDao.findByEmail(email);
 
-        if (
-                adminService.verifyLoginEmail(email) &&
-                adminService.verifyLoginPassword(password, adminDao.findByEmail(email))) {
-            request.getRequestDispatcher(request.getContextPath() + "/home.jsp").forward(request, response);
+        if (adminService.verifyLoginEmail(email) && adminService.verifyLoginPassword(password, admin)) {
+            response.sendRedirect(request.getContextPath() + "/home.jsp");
+            HttpSession session = request.getSession();
+            session.setAttribute("loggedAdmin", admin);
         } else {
             response.sendRedirect(request.getContextPath() + "/login");
         }

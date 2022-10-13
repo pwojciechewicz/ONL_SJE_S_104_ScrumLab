@@ -2,7 +2,7 @@ package pl.coderslab.dao;
 
 import pl.coderslab.exception.NotFoundException;
 import pl.coderslab.model.Admin;
-import pl.coderslab.model.Book;
+import pl.coderslab.model.MealPlan;
 import pl.coderslab.model.Plan;
 import pl.coderslab.utils.DbUtil;
 
@@ -21,6 +21,15 @@ public class PlanDao {
     private static final String CREATE_PLAN_QUERY = "INSERT INTO plan(name, description, created, admin_id) VALUES (?,?,?,?);";
     private static final String DELETE_PLAN_QUERY = "DELETE FROM plan where id = ?;";
     private static final String UPDATE_PLAN_QUERY = "UPDATE	plan SET name = ? , description = ?, created = ?, admin_id = ? WHERE	id = ?;";
+    private static final String READ_LAST_PLAN_QUERY = """
+                    SELECT plan.name as plan_name, day_name.name as day_name, meal_name,  recipe.name as recipe_name
+                    FROM `recipe_plan`
+                             JOIN day_name on day_name.id=day_name_id
+                             JOIN recipe on recipe.id=recipe_id
+                             JOIN plan on recipe_plan.plan_id = plan.id
+                            WHERE recipe_plan.plan_id =  (SELECT MAX(id) from plan WHERE admin_id = ?)
+                    ORDER by day_name.display_order, recipe_plan.display_order;
+            """;
 
     /**
      * Get plan by id
@@ -166,5 +175,28 @@ public class PlanDao {
             e.printStackTrace();
         }
         return count;
+    }
+
+
+    public List<MealPlan> readLastPlan(Admin admin) {
+        List<MealPlan> mealPlanList = new ArrayList<>();
+        try (Connection connection = DbUtil.getConnection();
+             PreparedStatement statement = connection.prepareStatement(READ_LAST_PLAN_QUERY);
+        ) {
+            statement.setInt(1, admin.getId());
+            ResultSet resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+                MealPlan mealPlan = new MealPlan();
+                mealPlan.setPlanName(resultSet.getString("plan_name"));
+                mealPlan.setDayName(resultSet.getString("day_name"));
+                mealPlan.setMealName(resultSet.getString("meal_name"));
+                mealPlan.setRecipeName(resultSet.getString("recipe_name"));
+                mealPlanList.add(mealPlan);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return mealPlanList;
     }
 }
