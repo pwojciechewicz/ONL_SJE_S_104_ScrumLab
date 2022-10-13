@@ -72,7 +72,7 @@ public class RecipeDao {
         }
     }
 
-    public static List<Recipe> findAll() {
+    public List<Recipe> findAll() {
         List<Recipe> recipesList = new ArrayList<>();
         try (Connection connection = DbUtil.getConnection();
              PreparedStatement statement = connection.prepareStatement(FIND_ALL_RECIPE_QUERY);
