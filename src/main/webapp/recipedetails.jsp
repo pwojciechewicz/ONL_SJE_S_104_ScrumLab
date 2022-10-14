@@ -16,17 +16,18 @@
 
           <table class="table borderless">
             <tbody>
+
             <tr class="d-flex">
               <th scope="row" class="col-2">Nazwa Przepisu</th>
-              <td class="col-7">${recipe.name}</td>
+              <td class="col-7">${recipeName.name}</td>
             </tr>
             <tr class="d-flex">
               <th scope="row" class="col-2">Opis przepisu</th>
-              <td class="col-7">${recipe.description}</td>
+              <td class="col-7">${recipeName.description}</td>
             </tr>
             <tr class="d-flex">
               <th scope="row" class="col-2">Przygotowanie (minuty)</th>
-              <td class="col-7">${recipe.preparationTime}</td>
+              <td class="col-7">${recipeName.preparationTime}</td>
             </tr>
             </tbody>
           </table>
@@ -38,11 +39,11 @@
           </div>
           <div class="row d-flex">
             <div class="col-5 p-4">
-              <p>${recipe.preparation}</p>
+              <p>${recipeName.preparation}</p>
             </div>
             <div class="col-2"></div>
             <ul class="col-5 p-4 list-unstyled">
-              <li>${recipe.ingredients}</li>
+              <li>${recipeName.ingredients}</li>
 
             </ul>
           </div>
