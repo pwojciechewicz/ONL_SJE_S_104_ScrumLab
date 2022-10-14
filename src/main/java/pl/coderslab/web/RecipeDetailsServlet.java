@@ -1,6 +1,7 @@
 package pl.coderslab.web;
 
 import pl.coderslab.dao.RecipeDao;
+import pl.coderslab.model.Recipe;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,11 +14,12 @@ import java.io.IOException;
 public class RecipeDetailsServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        RecipeDao recipeDao = new RecipeDao();
-        String id = request.getParameter("id");
-        Integer _id = Integer.parseInt(id);
-        request.setAttribute("recipe",recipeDao.read(_id));
-        getServletContext().getRequestDispatcher("/recipedetails.jsp").forward(request, response);
+
+//        RecipeDao recipeDao = new RecipeDao();
+//        Recipe recipe = (Recipe) request.getAttribute("recipe");
+//        int id = recipe.getId();
+//        request.setAttribute("recipe", recipeDao.read(id));
+//        getServletContext().getRequestDispatcher("/recipedetails.jsp").forward(request, response);
     }
 
     @Override
