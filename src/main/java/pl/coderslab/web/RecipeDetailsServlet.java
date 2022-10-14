@@ -15,11 +15,13 @@ public class RecipeDetailsServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-//        RecipeDao recipeDao = new RecipeDao();
-//        Recipe recipe = (Recipe) request.getAttribute("recipe");
-//        int id = recipe.getId();
-//        request.setAttribute("recipe", recipeDao.read(id));
-//        getServletContext().getRequestDispatcher("/recipedetails.jsp").forward(request, response);
+        Recipe recipe = new Recipe();
+        int id = Integer.parseInt(request.getParameter("id"));
+
+        RecipeDao recipeDao = new RecipeDao();
+        request.setAttribute("recipeName", recipeDao.read(id));
+
+        getServletContext().getRequestDispatcher("/recipedetails.jsp").forward(request, response);
     }
 
     @Override
