@@ -5,6 +5,8 @@
 <jsp:include page="${pageContext.request.contextPath}/header.jsp"/>
 <jsp:include page="${pageContext.request.contextPath}/sideBarMenu.jsp"/>
 
+<jsp:include page="${pageContext.request.contextPath}/sideBarMenu.jsp"/>
+
 
         <div class="m-4 p-3 width-medium text-color-darker">
             <div class="dashboard-content border-dashed p-3 m-4 view-height">
