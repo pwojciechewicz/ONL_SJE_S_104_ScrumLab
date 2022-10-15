@@ -6,10 +6,13 @@ import pl.coderslab.model.Admin;
 import pl.coderslab.model.Recipe;
 import pl.coderslab.service.AdminService;
 
+import javax.print.attribute.standard.DateTimeAtCreation;
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.util.Date;
 
 @WebServlet(name = "RecipeAddServlet", value = "/app/recipe/add")
 public class RecipeAddServlet extends HttpServlet {
@@ -30,7 +33,7 @@ public class RecipeAddServlet extends HttpServlet {
         recipe.setName(request.getParameter("name"));
         recipe.setDescription(request.getParameter("ingredients"));
         recipe.setIngredients(request.getParameter("description"));
-        recipe.setCreated(request.getParameter("created"));
+        recipe.setCreated(String.valueOf(LocalDateTime.now()));
         recipe.setUpdated(request.getParameter("updated"));
         recipe.setPreparationTime(Integer.parseInt(request.getParameter("preparation_time")));
         recipe.setPreparation(request.getParameter("preparation"));
@@ -40,5 +43,7 @@ public class RecipeAddServlet extends HttpServlet {
         recipeDao.create(recipe);
 
         response.sendRedirect("/app/recipe/list");
+
+
     }
 }
