@@ -6,8 +6,10 @@ public class MealPlan {
     private String recipeName;
     private String planName;
     private String planDesription;
+
     private int recipePlanId;
     private int planId;
+
 
     public MealPlan(String dayName, String mealName, String recipeName, String planName, String planDesription, int recipePlanId, int planId) {
         this.dayName = dayName;
@@ -17,6 +19,7 @@ public class MealPlan {
         this.planDesription = planDesription;
         this.recipePlanId = recipePlanId;
         this.planId = planId;
+
     }
     public MealPlan() {
     }
@@ -39,6 +42,14 @@ public class MealPlan {
 
     public String getDayName() {
         return dayName;
+    }
+
+    public int getMealDisplayOrder() {
+        return mealDisplayOrder;
+    }
+
+    public void setMealDisplayOrder(int mealDisplayOrder) {
+        this.mealDisplayOrder = mealDisplayOrder;
     }
 
     public void setDayName(String dayName) {
