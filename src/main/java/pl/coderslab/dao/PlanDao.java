@@ -31,7 +31,8 @@ public class PlanDao {
                     ORDER by day_name.display_order, recipe_plan.display_order;
             """;
     private static final String READ_PLAN_DETAILS_QUERRY = """
-                    SELECT plan.name as plan_name, plan.description as plan_description, day_name.name as day_name, meal_name,  recipe.name as recipe_name
+                    SELECT plan.name as plan_name, plan.description as plan_description, day_name.name as day_name, 
+                    meal_name,  recipe.name as recipe_name, recipe_plan.id as recipe_plan_id, recipe_plan.plan_id as plan_id
                     FROM `recipe_plan`
                              JOIN day_name on day_name.id=day_name_id
                              JOIN recipe on recipe.id=recipe_id
@@ -224,6 +225,8 @@ public class PlanDao {
                 mealPlan.setDayName(resultSet.getString("day_name"));
                 mealPlan.setMealName(resultSet.getString("meal_name"));
                 mealPlan.setRecipeName(resultSet.getString("recipe_name"));
+                mealPlan.setRecipePlanId(resultSet.getInt("recipe_plan_id"));
+                mealPlan.setPlanId(resultSet.getInt("plan_id"));
                 mealPlanList.add(mealPlan);
             }
         } catch (SQLException e) {

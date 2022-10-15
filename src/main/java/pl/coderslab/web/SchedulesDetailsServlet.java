@@ -1,6 +1,8 @@
 package pl.coderslab.web;
 
+import pl.coderslab.dao.DayNameDao;
 import pl.coderslab.dao.PlanDao;
+import pl.coderslab.model.DayName;
 import pl.coderslab.model.MealPlan;
 
 import javax.servlet.*;
@@ -21,6 +23,11 @@ public class SchedulesDetailsServlet extends HttpServlet {
 
         List<MealPlan> planDetailsList = planDao.planDetails(id);
         request.setAttribute("planDetailsList", planDetailsList);
+
+        DayNameDao dayNameDao = new DayNameDao();
+        List<DayName> dayNameList = dayNameDao.findAll();
+        request.setAttribute("dayNameList", dayNameList);
+
 
         String planName = planDetailsList.get(0).getPlanName();
         request.setAttribute("planName", planName);
