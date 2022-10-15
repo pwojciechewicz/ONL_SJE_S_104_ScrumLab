@@ -6,17 +6,38 @@ public class MealPlan {
     private String recipeName;
     private String planName;
     private String planDesription;
-    private int mealDisplayOrder;
 
-    public MealPlan(String dayName, String mealName, String recipeName, String planName, String planDesription) {
+    private int recipePlanId;
+    private int planId;
+
+
+    public MealPlan(String dayName, String mealName, String recipeName, String planName, String planDesription, int recipePlanId, int planId) {
         this.dayName = dayName;
         this.mealName = mealName;
         this.recipeName = recipeName;
         this.planName = planName;
-        this.planName = planDesription;
+        this.planDesription = planDesription;
+        this.recipePlanId = recipePlanId;
+        this.planId = planId;
 
     }
     public MealPlan() {
+    }
+
+    public int getPlanId() {
+        return planId;
+    }
+
+    public void setPlanId(int planId) {
+        this.planId = planId;
+    }
+
+    public int getRecipePlanId() {
+        return recipePlanId;
+    }
+
+    public void setRecipePlanId(int recipePlanId) {
+        this.recipePlanId = recipePlanId;
     }
 
     public String getDayName() {

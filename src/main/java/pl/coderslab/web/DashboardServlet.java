@@ -1,8 +1,10 @@
 package pl.coderslab.web;
 
+import pl.coderslab.dao.DayNameDao;
 import pl.coderslab.dao.PlanDao;
 import pl.coderslab.dao.RecipeDao;
 import pl.coderslab.model.Admin;
+import pl.coderslab.model.DayName;
 import pl.coderslab.model.MealPlan;
 
 import javax.servlet.*;
@@ -17,12 +19,18 @@ public class DashboardServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         Admin admin = (Admin) session.getAttribute("loggedAdmin");
+
         RecipeDao recipeDao = new RecipeDao();
         int recipesQuantity = recipeDao.countAdminRecipe(admin);
         request.setAttribute("recipeQuantity", recipesQuantity);
+
         PlanDao planDao = new PlanDao();
         int plansQuantity = planDao.countAdminPlans(admin);
         request.setAttribute("plansQuantity", plansQuantity);
+
+        DayNameDao dayNameDao = new DayNameDao();
+        List<DayName> dayNameList = dayNameDao.findAll();
+        request.setAttribute("dayNameList", dayNameList);
 
         List<MealPlan> mealPlanList = planDao.readLastPlan(admin);
         request.setAttribute("mealPlanList", mealPlanList);

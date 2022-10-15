@@ -43,36 +43,37 @@
                 </div>
             </div>
 
-            <table class="table">
-                <thead>
-                <tr class="d-flex">
-                    <th class="col-2">Poniedziałek</th>
-                    <th class="col-8"></th>
-                    <th class="col-2"></th>
-                </tr>
-                </thead>
-                <tbody class="text-color-lighter">
-                <c:forEach var="list" items="${planDetailsList}">
-                    <c:choose>
-                        <c:when test="${list.dayName == 'poniedziałek'}">
-                            <tr class="d-flex">
-                                <td class="col-2">${list.mealName}</td>
-                                <td class="col-7">${list.recipeName}</td>
-                                <td class="col-1 center">
-                                    <a href="#" class="btn btn-danger rounded-0 text-light m-1">Usuń</a>
-                                </td>
-                                <td class="col-2 center">
-                                    <a href="app-details-schedules.html" class="btn btn-info rounded-0 text-light m-1">Szczegóły</a>
-                                </td>
-                            </tr>
-                        </c:when>
-                        <c:otherwise>
-                        </c:otherwise>
-                    </c:choose>
-                </c:forEach>
-                </tbody>
-            </table>
-
+            <c:forEach var="dayNameList" items="${dayNameList}">
+                <table class="table">
+                    <thead>
+                    <tr class="d-flex">
+                        <th class="col-2">${dayNameList.name}</th>
+                        <th class="col-8"></th>
+                        <th class="col-2"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <c:forEach var="list" items="${planDetailsList}">
+                        <c:choose>
+                            <c:when test="${list.dayName == dayNameList.name}">
+                                <tr class="d-flex">
+                                    <td class="col-2">${list.mealName}</td>
+                                    <td class="col-8">${list.recipeName}</td>
+                                    <td class="col-1 center">
+                                        <a href="/delete/recipe/from/plan?id1=${list.recipePlanId}&id2=${list.planId}" class="btn btn-danger rounded-0 text-light m-1" onclick="return confirm('Czy na pewno chcesz to usunąć?')">Usuń</a>
+                                    </td>
+                                    <td class="col-1 center">
+                                        <a href="app-details-schedules.html" class="btn btn-info rounded-0 text-light m-1">Szczegóły</a>
+                                    </td>
+                                </tr>
+                            </c:when>
+                            <c:otherwise>
+                            </c:otherwise>
+                        </c:choose>
+                    </c:forEach>
+                    </tbody>
+                </table>
+            </c:forEach>
 
         </div>
     </div>
