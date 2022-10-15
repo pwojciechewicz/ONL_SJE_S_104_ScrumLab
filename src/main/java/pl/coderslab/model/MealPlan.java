@@ -6,9 +6,9 @@ public class MealPlan {
     private String recipeName;
     private String planName;
     private String planDesription;
-
     private int recipePlanId;
     private int planId;
+    private int mealDisplayOrder;
 
 
     public MealPlan(String dayName, String mealName, String recipeName, String planName, String planDesription, int recipePlanId, int planId) {
