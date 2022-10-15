@@ -6,6 +6,7 @@ public class MealPlan {
     private String recipeName;
     private String planName;
     private String planDesription;
+    private int mealDisplayOrder;
 
     public MealPlan(String dayName, String mealName, String recipeName, String planName, String planDesription) {
         this.dayName = dayName;
@@ -13,12 +14,21 @@ public class MealPlan {
         this.recipeName = recipeName;
         this.planName = planName;
         this.planName = planDesription;
+
     }
     public MealPlan() {
     }
 
     public String getDayName() {
         return dayName;
+    }
+
+    public int getMealDisplayOrder() {
+        return mealDisplayOrder;
+    }
+
+    public void setMealDisplayOrder(int mealDisplayOrder) {
+        this.mealDisplayOrder = mealDisplayOrder;
     }
 
     public void setDayName(String dayName) {
