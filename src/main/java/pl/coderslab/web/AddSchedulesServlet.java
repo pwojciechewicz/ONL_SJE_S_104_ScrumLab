@@ -9,6 +9,7 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
+import java.time.LocalDateTime;
 
 @WebServlet(name = "AddSchedulesServlet", value = "/app/plan/add")
 public class AddSchedulesServlet extends HttpServlet {
@@ -19,18 +20,19 @@ public class AddSchedulesServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        Admin admin = (Admin) session.getAttribute("loggedAdmin");
+        int id = admin.getId();
 
         Plan plan = new Plan();
+
         plan.setName(request.getParameter("planName"));
         plan.setDescription(request.getParameter("planDescription"));
-
-       // plan.setAdminId();
-
-        //session id
-        //data
+        plan.setCreated(String.valueOf(LocalDateTime.now()));
+        plan.setAdminId(id);
 
         PlanDao planDao = new PlanDao();
         planDao.create(plan);
-        response.sendRedirect(request.getContextPath()+ "/app/plan/list");
+        response.sendRedirect("/app/plan/list");
     }
 }

@@ -1,15 +1,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%--
-  Created by IntelliJ IDEA.
-  User: ph
-  Date: 12.10.2022
-  Time: 20:43
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <link href='<c:url value="/css/style.css"/>' rel="stylesheet" type="text/css">
-<jsp:include page="${pageContext.request.contextPath}/header.jsp"/>
 
+<jsp:include page="${pageContext.request.contextPath}/header.jsp"/>
 <jsp:include page="${pageContext.request.contextPath}/sideBarMenu.jsp"/>
 
             <div class="m-4 p-3 width-medium">
@@ -33,7 +26,7 @@
                                     Nazwa planu
                                 </label>
                                 <div class="col-sm-10">
-                                    <input class="form-control" id="planName" placeholder="Nazwa planu">
+                                    <input class="form-control" id="planName" name="planName" value="${planName}" placeholder="Nazwa planu">
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -41,8 +34,8 @@
                                     Opis planu
                                 </label>
                                 <div class="col-sm-10">
-                                <textarea class="form-control" rows="5" id="planDescription"
-                                          placeholder="Opis plany"></textarea>
+                                <textarea class="form-control" rows="5" id="planDescription" name="planDescription" value="${planDescription}"
+                                          placeholder="Opis planu"></textarea>
                                 </div>
                             </div>
 

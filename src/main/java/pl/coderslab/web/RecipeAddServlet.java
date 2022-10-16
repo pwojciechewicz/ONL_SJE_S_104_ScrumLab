@@ -30,6 +30,7 @@ public class RecipeAddServlet extends HttpServlet {
         Admin admin = (Admin) session.getAttribute("loggedAdmin");
         int id = admin.getId();
         Recipe recipe = new Recipe();
+
         recipe.setName(request.getParameter("name"));
         recipe.setDescription(request.getParameter("ingredients"));
         recipe.setIngredients(request.getParameter("description"));
