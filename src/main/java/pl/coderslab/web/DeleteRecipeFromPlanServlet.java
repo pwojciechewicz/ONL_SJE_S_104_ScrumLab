@@ -15,14 +15,10 @@ public class DeleteRecipeFromPlanServlet extends HttpServlet {
         int recipePlanId = Integer.parseInt(request.getParameter("id1"));
         int planId = Integer.parseInt(request.getParameter("id2"));
 
-
-
         RecipePlanDao recipePlanDao = new RecipePlanDao();
         recipePlanDao.delete(recipePlanId);
 
         response.sendRedirect("/app/plan/details?id=" + planId);
-
-
 
     }
 
