@@ -14,10 +14,11 @@ import java.util.List;
 public class SchedulesServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher(request.getContextPath() + "/schedules.jsp").forward(request, response);
+
         PlanDao planDao = new PlanDao();
-        request.setAttribute("plan", planDao.findAll());
-        List<Plan> plan = planDao.findAll();
+        request.setAttribute("plans", planDao.findAll());
+//        List<Plan> plan = planDao.findAll();
+        getServletContext().getRequestDispatcher("/schedules.jsp").forward(request, response);
 
     }
 

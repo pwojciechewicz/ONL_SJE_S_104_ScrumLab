@@ -15,6 +15,10 @@ import java.io.IOException;
 public class RecipeAddToPlanServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int planId = Integer.parseInt(request.getParameter("id"));
+        PlanDao planDao = new PlanDao();
+        Plan plan = planDao.read(planId);
+        request.setAttribute("plan", plan);
         getServletContext().getRequestDispatcher("/recipetoplan.jsp").forward(request, response);
     }
 
