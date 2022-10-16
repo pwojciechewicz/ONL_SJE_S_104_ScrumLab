@@ -20,8 +20,8 @@ public class SchedulesDetailsServlet extends HttpServlet {
 
         PlanDao planDao = new PlanDao();
 
-
         List<MealPlan> planDetailsList = planDao.planDetails(id);
+
         request.setAttribute("planDetailsList", planDetailsList);
 
         DayNameDao dayNameDao = new DayNameDao();
@@ -29,10 +29,10 @@ public class SchedulesDetailsServlet extends HttpServlet {
         request.setAttribute("dayNameList", dayNameList);
 
 
-        String planName = planDetailsList.get(0).getPlanName();
+        String planName = planDao.read(id).getName();
         request.setAttribute("planName", planName);
 
-        String planDescription = planDetailsList.get(0).getPlanDesription();
+        String planDescription = planDao.read(id).getDescription();
         request.setAttribute("planDescription", planDescription);
 
         request.getRequestDispatcher(request.getContextPath() + "/schedulesDetails.jsp").forward(request, response);
