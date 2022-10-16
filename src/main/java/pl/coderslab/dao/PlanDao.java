@@ -30,7 +30,7 @@ public class PlanDao {
                             WHERE recipe_plan.plan_id =  (SELECT MAX(id) from plan WHERE admin_id = ?)
                     ORDER by day_name.display_order, recipe_plan.display_order;
             """;
-    private static final String READ_PLAN_DETAILS_QUERRY = """
+    private static final String READ_PLAN_DETAILS_QUERY = """
                     SELECT plan.name as plan_name, plan.description as plan_description, day_name.name as day_name, 
                     meal_name,  recipe.name as recipe_name, recipe_plan.id as recipe_plan_id, recipe_plan.plan_id as plan_id
                     FROM `recipe_plan`
@@ -212,7 +212,7 @@ public class PlanDao {
     public List<MealPlan> planDetails(int planId) {
         List<MealPlan> mealPlanList = new ArrayList<>();
         try (Connection connection = DbUtil.getConnection();
-             PreparedStatement statement = connection.prepareStatement(READ_PLAN_DETAILS_QUERRY);
+             PreparedStatement statement = connection.prepareStatement(READ_PLAN_DETAILS_QUERY);
         ) {
             statement.setInt(1, planId);
             ResultSet resultSet = statement.executeQuery();
