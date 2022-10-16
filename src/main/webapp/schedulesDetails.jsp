@@ -66,7 +66,7 @@
                                                onclick="return confirm('Czy na pewno chcesz to usunąć?')">Usuń</a>
                                         </td>
                                         <td class="col-1 center">
-                                            <a href="app-details-schedules.html"
+                                            <a href="/app/recipe/details?id=${list.recipeId}"
                                                class="btn btn-info rounded-0 text-light m-1">Szczegóły</a>
                                         </td>
                                     </tr>

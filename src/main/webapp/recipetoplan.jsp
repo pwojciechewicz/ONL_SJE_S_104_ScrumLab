@@ -12,9 +12,9 @@
             <div class="col noPadding">
                 <h3 class="color-header text-uppercase">DODAJ PRZEPIS DO PLANU</h3>
             </div>
-            <div class="col d-flex justify-content-end mb-2 noPadding">
-                <a href="/app/recipe/plan/add" class="btn btn-success rounded-0 pt-0 pb-0 pr-4 pl-4">Wyślij</a>
-            </div>
+<%--            <div class="col d-flex justify-content-end mb-2 noPadding">--%>
+<%--                <a href="/app/recipe/plan/add" class="btn btn-success rounded-0 pt-0 pb-0 pr-4 pl-4">Wyślij</a>--%>
+<%--            </div>--%>
         </div>
 
         <div class="schedules-content">
@@ -24,11 +24,9 @@
                         Wybierz plan
                     </label>
                     <div class="col-sm-3">
-                        <select class="form-control" id="choosePlan">
+                        <select class="form-control" id="choosePlan" name="planId">
                             <c:forEach var="planName" items="${planNames}">
-
                                 <option value="${planName.id}">${planName.name}</option>
-
                             </c:forEach>
                         </select>
                     </div>
@@ -38,7 +36,7 @@
                         Nazwa posiłku
                     </label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" name="mealName" value="${mealName}" id="name"
+                        <input type="text" class="form-control" name="mealName"  id="name"
                                placeholder="Nazwa posiłku">
                     </div>
                 </div>
@@ -47,7 +45,7 @@
                         Numer posiłku
                     </label>
                     <div class="col-sm-2">
-                        <input type="text" class="form-control" name="mealDisplayOrder" value="${mealDisplayOrder}" id="number"
+                        <input type="number" class="form-control" name="mealDisplayOrder" id="number"
                                placeholder="Numer posiłki">
                     </div>
                 </div>
@@ -57,13 +55,10 @@
                     </label>
                     <div class="col-sm-4">
 
-                        <select class="form-control" id="recipe">
-
+                        <select class="form-control" id="recipe" name="recipeId">
                             <c:forEach var="recipeName" items="${recipeNames}">
-
                                 <option value="${recipeName.id}">${recipeName.name}</option>
                          </c:forEach>
-
                         </select>
                     </div>
                 </div>
@@ -72,14 +67,14 @@
                         Dzień
                     </label>
                     <div class="col-sm-2">
-                        <select class="form-control" id="day">
+                        <select class="form-control" id="day" name="dayId">
                             <c:forEach var="dayName" items="${dayNames}">
                                 <option value="${dayName.id}">${dayName.name}</option>
-
                             </c:forEach>
                         </select>
                     </div>
                 </div>
+                <input type="submit" class="btn btn-success rounded-0 pt-0 pb-0 pr-4 pl-4" value="Zapisz">
             </form>
         </div>
     </div>
