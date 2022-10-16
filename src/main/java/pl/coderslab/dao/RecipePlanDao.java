@@ -12,7 +12,7 @@ public class RecipePlanDao {
     // ZAPYTANIA SQL
 
     private static final String DELETE_PLAN_QUERY = "DELETE FROM recipe_plan where id = ?";
-    private static final String CREATE_RECIPE_PLAN_QUERY = "INSERT INTO recipe_plan (meal_name, display_order) VALUES (?,?)";
+    private static final String CREATE_RECIPE_PLAN_QUERY = "INSERT INTO recipe_plan (recipe_id, meal_name, display_order, day_name_id, plan_id) VALUES (?, ?, ?, ?, ?)";
 
     /**
      * Get plan by id
@@ -36,13 +36,16 @@ public class RecipePlanDao {
             e.printStackTrace();
         }
     }
-
+//    recipe_id, meal_name, display_order, day_name_id, plan_id
     public MealPlan create(MealPlan mealPlan) {
         try (Connection connection = DbUtil.getConnection();
              PreparedStatement insertStm = connection.prepareStatement(CREATE_RECIPE_PLAN_QUERY, PreparedStatement.RETURN_GENERATED_KEYS)) {
 
-            insertStm.setString(1, mealPlan.getMealName());
-            insertStm.setInt(2, mealPlan.getMealDisplayOrder());
+            insertStm.setInt(1, mealPlan.getRecipeId());
+            insertStm.setString(2, mealPlan.getMealName());
+            insertStm.setInt(3, mealPlan.getMealDisplayOrder());
+            insertStm.setInt(4, mealPlan.getDayNameId());
+            insertStm.setInt(5, mealPlan.getPlanId());
             int result = insertStm.executeUpdate();
 
             if (result != 1) {
@@ -63,6 +66,5 @@ public class RecipePlanDao {
         }
         return null;
     }
-
 
 }

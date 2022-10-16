@@ -24,6 +24,14 @@ public class MealPlan {
 
     }
 
+    public MealPlan(int recipeId, String mealName, int mealDisplayOrder,  int dayNameId , int planId) {
+        this.mealName = mealName;
+        this.planId = planId;
+        this.mealDisplayOrder = mealDisplayOrder;
+        this.recipeId = recipeId;
+        this.dayNameId = dayNameId;
+    }
+
     public MealPlan() {
     }
 
