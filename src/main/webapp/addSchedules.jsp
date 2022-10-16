@@ -2,7 +2,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <link href='<c:url value="/css/style.css"/>' rel="stylesheet" type="text/css">
 
-<jsp:include page="${pageContext.request.contextPath}/header.jsp"/>
+<jsp:include page="${pageContext.request.contextPath}/fragments/headerLogged.jsp"/>
 <jsp:include page="${pageContext.request.contextPath}/sideBarMenu.jsp"/>
 
             <div class="m-4 p-3 width-medium">
