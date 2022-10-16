@@ -1,6 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<jsp:include page="${pageContext.request.contextPath}/header.jsp"/>
+<jsp:include page="${pageContext.request.contextPath}/fragments/headerLogged.jsp"/>
 <jsp:include page="${pageContext.request.contextPath}/sideBarMenu.jsp"/>
 
 
