@@ -1,7 +1,10 @@
 package pl.coderslab.web;
 
+import pl.coderslab.dao.DayNameDao;
 import pl.coderslab.dao.PlanDao;
 import pl.coderslab.dao.RecipeDao;
+import pl.coderslab.dao.RecipePlanDao;
+import pl.coderslab.model.DayName;
 import pl.coderslab.model.MealPlan;
 import pl.coderslab.model.Plan;
 import pl.coderslab.model.Recipe;
@@ -15,28 +18,45 @@ import java.io.IOException;
 public class RecipeAddToPlanServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int planId = Integer.parseInt(request.getParameter("id"));
+
         PlanDao planDao = new PlanDao();
-        Plan plan = planDao.read(planId);
-        request.setAttribute("plan", plan);
+        request.setAttribute("planNames", planDao.findAll());
+
+        RecipeDao recipeDao = new RecipeDao();
+        request.setAttribute("recipeNames", recipeDao.findAll());
+
+        DayNameDao dayNameDao = new DayNameDao();
+        request.setAttribute("dayNames", dayNameDao.findAll());
+
+
         getServletContext().getRequestDispatcher("/recipetoplan.jsp").forward(request, response);
+
+
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        Recipe recipe = new Recipe();
+        int recipeId = Integer.parseInt(request.getParameter("recipeName"));
+
+        Plan plan = new Plan();
+        int planId = Integer.parseInt(request.getParameter("planName"));
+
+        DayName dayName = new DayName();
+        int dayNameId = Integer.parseInt(request.getParameter("dayName"));
+
         MealPlan mealPlan = new MealPlan();
+        mealPlan.setRecipeId(recipeId);
         mealPlan.setMealName(request.getParameter("mealName"));
         mealPlan.setMealDisplayOrder(Integer.parseInt(request.getParameter("mealDisplayOrder")));
+        mealPlan.setDayNameId(dayNameId);
+        mealPlan.setPlanId(planId);
 
-        PlanDao planDao = new PlanDao();
-        request.setAttribute("planNames", planDao.findAll());
-//        Recipe recipe = new Recipe();
-//        int id = Integer.parseInt(request.getParameter("id"));
-//
-//        Plan plan = new Plan();
-//        int id = Integer.parseInt(request.getParameter("id"));
-
-        getServletContext().getRequestDispatcher("/recipetoplan.jsp").forward(request, response);
+        RecipePlanDao recipePlanDao = new RecipePlanDao();
+        recipePlanDao.create(mealPlan);
+        response.sendRedirect("/app/plan/list");
+//        getServletContext().getRequestDispatcher("/recipetoplan.jsp").forward(request, response);
 
 
     }

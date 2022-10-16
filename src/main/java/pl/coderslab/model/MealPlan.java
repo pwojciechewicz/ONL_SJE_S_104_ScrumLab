@@ -9,6 +9,8 @@ public class MealPlan {
     private int recipePlanId;
     private int planId;
     private int mealDisplayOrder;
+    private int recipeId;
+    private int dayNameId;
 
 
     public MealPlan(String dayName, String mealName, String recipeName, String planName, String planDesription, int recipePlanId, int planId) {
@@ -21,6 +23,7 @@ public class MealPlan {
         this.planId = planId;
 
     }
+
     public MealPlan() {
     }
 
@@ -87,4 +90,21 @@ public class MealPlan {
     public void setPlanDesription(String planDesription) {
         this.planDesription = planDesription;
     }
+
+    public int getRecipeId() {
+        return recipeId;
+    }
+
+    public void setRecipeId(int recipeId) {
+        this.recipeId = recipeId;
+    }
+
+    public int getDayNameId() {
+        return recipeId;
+    }
+
+    public void setDayNameId(int dayNameId) {
+        this.dayNameId = dayNameId;
+    }
+
 }
